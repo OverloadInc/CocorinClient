@@ -6,6 +6,9 @@ import java.net.UnknownHostException;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
+/**
+ * Client class controls the user's operations for establishing a correct communication trough the chat application.
+ */
 public class Client extends Thread {
 
     /**

@@ -11,6 +11,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.URL;
 
+/**
+ * Class that implements a Chat window to communicate a set of connected users vía sockets.
+ */
 public class Chat extends JFrame {
     private JButton btnSend;
     private JPanel mainPanel;
@@ -21,6 +24,8 @@ public class Chat extends JFrame {
     private JScrollPane scrollMessage;
     private JTextPane txtConsole;
     private JTextPane txtMessage;
+    private JLabel lblSession;
+    private JLabel lblOverload;
     private JList<String> userList;
     private DefaultListModel<String> model;
     private FontEditor fontEditor;
@@ -60,26 +65,29 @@ public class Chat extends JFrame {
      * Initializes the chat components.
      */
     private void initComponents() {
-        model = new DefaultListModel<>();
-        fontEditor = new FontEditor();
-        mainPanel = new JPanel();
-        scrollConsole = new JScrollPane();
-        txtConsole = new JTextPane();
-        scrollList = new JScrollPane();
-        userList = new JList<>(model);
-        scrollMessage = new JScrollPane();
-        txtMessage = new JTextPane();
         btnSend = new JButton();
         northPanel = new JPanel();
         southPanel = new JPanel();
+        mainPanel = new JPanel();
+        scrollConsole = new JScrollPane();
+        scrollList = new JScrollPane();
+        scrollMessage = new JScrollPane();
+        txtConsole = new JTextPane();
+        txtMessage = new JTextPane();
+        lblSession = new JLabel();
+        lblOverload = new JLabel();
+        model = new DefaultListModel<>();
+        userList = new JList<>(model);
+        fontEditor = new FontEditor();
+
         GridBagConstraints gridBagConstraints;
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Chat client");
+        setTitle("JChat client v1.0");
         setIconImage(getIcon().getImage());
-        setMinimumSize(new Dimension(600, 600));
+        setMinimumSize(new Dimension(800, 600));
         setName("frmChat");
-        setPreferredSize(new Dimension(600, 600));
+        setPreferredSize(new Dimension(800, 600));
 
         addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent evt) {
@@ -160,21 +168,30 @@ public class Chat extends JFrame {
 
         getContentPane().add(mainPanel, BorderLayout.CENTER);
 
-        GroupLayout northPanelLayout = new GroupLayout(northPanel);
         northPanel.setName("northPanel");
-        northPanel.setLayout(northPanelLayout);
+        northPanel.setLayout(new BorderLayout());
 
-        northPanelLayout.setHorizontalGroup(northPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 600, Short.MAX_VALUE));
-        northPanelLayout.setVerticalGroup(northPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 100, Short.MAX_VALUE));
+        lblSession.setHorizontalAlignment(SwingConstants.CENTER);
+        lblSession.setHorizontalTextPosition(SwingConstants.CENTER);
+        lblSession.setMinimumSize(new Dimension(100, 25));
+        lblSession.setName("lblSession");
+        lblSession.setPreferredSize(new Dimension(100, 25));
+
+        northPanel.add(lblSession, BorderLayout.CENTER);
 
         getContentPane().add(northPanel, BorderLayout.NORTH);
 
-        GroupLayout southPanelLayout = new GroupLayout(southPanel);
         southPanel.setName("southPanel");
-        southPanel.setLayout(southPanelLayout);
+        southPanel.setLayout(new BorderLayout());
 
-        southPanelLayout.setHorizontalGroup(southPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 600, Short.MAX_VALUE));
-        southPanelLayout.setVerticalGroup(southPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGap(0, 100, Short.MAX_VALUE));
+        lblOverload.setHorizontalAlignment(SwingConstants.CENTER);
+        lblOverload.setText("Powered by Overload Inc.");
+        lblOverload.setHorizontalTextPosition(SwingConstants.CENTER);
+        lblOverload.setMinimumSize(new Dimension(100, 25));
+        lblOverload.setName("lblOverload"); // NOI18N
+        lblOverload.setPreferredSize(new Dimension(100, 25));
+
+        southPanel.add(lblOverload, BorderLayout.CENTER);
 
         getContentPane().add(southPanel, BorderLayout.SOUTH);
 
@@ -256,7 +273,7 @@ public class Chat extends JFrame {
      * Adds a new connected user to the list.
      * @param user the connected user.
      */
-    void addConnectedUser(String user) {
+    public void addConnectedUser(String user) {
         model.addElement(user);
     }
 
@@ -265,7 +282,7 @@ public class Chat extends JFrame {
      * @param transmitter the user who sends the message.
      * @param message the current message.
      */
-    void addMessage(String transmitter, String message) {
+    public void addMessage(String transmitter, String message) {
         fontEditor.setSimple(txtConsole, "##### " + transmitter + " ##### : \n" + message + "\n");
     }
 
@@ -273,8 +290,8 @@ public class Chat extends JFrame {
      * Adds the tittle for the window session.
      * @param id the id for the current session.
      */
-    void initSession(String id) {
-        this.setTitle("Session:\t" + id + "\tinitiated.");
+    public void initSession(String id) {
+        lblSession.setText("Session: <" + id + "> started.");
     }
 
     /**
