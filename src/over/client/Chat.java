@@ -57,8 +57,6 @@ public class Chat extends JFrame {
         String portName = portData[2];
 
         client = new Client(this, portIP, Integer.valueOf(portNumber), portName);
-
-        playSound("bubble_wav.wav");
     }
 
     /**
@@ -264,7 +262,8 @@ public class Chat extends JFrame {
 
         client.sendMessage(receiver, message);
 
-        fontEditor.setSimple(txtConsole, "## Me -> " + receiver + " ## : \n" + message + "\n");
+        fontEditor.setBold(txtConsole, client.getClientId() + " => " + receiver + ":");
+        fontEditor.setSimple(txtConsole,message + "\n");
 
         txtMessage.setText("");
     }
@@ -283,7 +282,8 @@ public class Chat extends JFrame {
      * @param message the current message.
      */
     public void addMessage(String transmitter, String message) {
-        fontEditor.setSimple(txtConsole, "##### " + transmitter + " ##### : \n" + message + "\n");
+        fontEditor.setBold(txtConsole, transmitter + ":");
+        fontEditor.setSimple(txtConsole, message + "\n");
     }
 
     /**
@@ -291,7 +291,9 @@ public class Chat extends JFrame {
      * @param id the id for the current session.
      */
     public void initSession(String id) {
-        lblSession.setText("Session: <" + id + "> started.");
+        playSound("bubble_wav.wav");
+
+        lblSession.setText("Session:\t<" + id + ">\tstarted.");
     }
 
     /**
