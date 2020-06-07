@@ -211,7 +211,7 @@ public class Client extends Thread {
      * Notifies to the server that a user is disconnected every time the client closes the chat application. Then, the
      * server updates each connected user's list.
      */
-    void acceptDisconnection() {
+    public void acceptDisconnection() {
         LinkedList<String> dataList = new LinkedList<>();
 
         dataList.add("DISCONNECTION_REQUEST");

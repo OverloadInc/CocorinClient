@@ -1,14 +1,14 @@
 package over.client;
 
+import over.controller.ButtonListener;
+import over.controller.FrameListener;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.net.URL;
 
 /**
@@ -30,15 +30,7 @@ public class Chat extends JFrame {
     private DefaultListModel<String> model;
     private FontEditor fontEditor;
 
-    /**
-     * Specifies the default application's port number.
-     */
-    private final String PORT ="10101";
 
-    /**
-     * Specifies the default server IP (localhost).
-     */
-    private final String IP ="127.0.0.1";
 
     /**
      * Instance for the client which communicates with the server.
@@ -80,17 +72,18 @@ public class Chat extends JFrame {
 
         GridBagConstraints gridBagConstraints;
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("JChat client v1.0");
-        setIconImage(getIcon().getImage());
-        setMinimumSize(new Dimension(800, 600));
+        setTitle("JChat v1.0");
         setName("frmChat");
+        setIconImage(FrameListener.getFrameListener().getIcon().getImage());
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(800, 600));
         setPreferredSize(new Dimension(800, 600));
 
         addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent evt) {
                 formWindowClosed(evt);
             }
+
             public void windowClosing(WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -148,14 +141,16 @@ public class Chat extends JFrame {
 
         mainPanel.add(scrollMessage, gridBagConstraints);
 
-        btnSend.setText("Send");
         btnSend.setName("btnSend");
+        btnSend.setToolTipText("Send a message");
+        btnSend.setIcon(new ImageIcon(getClass().getResource("/over/res/img/close_mail_01.png")));
         btnSend.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent event) {
-                sendMessage(event);
+            public void actionPerformed(ActionEvent e) {
+                sendMessage(e);
             }
         });
+        btnSend.addMouseListener(new ButtonListener(btnSend));
 
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 4;
@@ -182,11 +177,11 @@ public class Chat extends JFrame {
         southPanel.setName("southPanel");
         southPanel.setLayout(new BorderLayout());
 
-        lblOverload.setHorizontalAlignment(SwingConstants.CENTER);
+        lblOverload.setName("lblOverload");
         lblOverload.setText("Powered by Overload Inc.");
+        lblOverload.setHorizontalAlignment(SwingConstants.CENTER);
         lblOverload.setHorizontalTextPosition(SwingConstants.CENTER);
         lblOverload.setMinimumSize(new Dimension(100, 25));
-        lblOverload.setName("lblOverload"); // NOI18N
         lblOverload.setPreferredSize(new Dimension(100, 25));
 
         southPanel.add(lblOverload, BorderLayout.CENTER);
@@ -212,38 +207,6 @@ public class Chat extends JFrame {
      */
     public void formWindowClosing(WindowEvent event) {
         client.acceptDisconnection();
-    }
-
-    /**
-     * Gets the icon for the chat application.
-     * @return the icon's path for the application.
-     */
-    private ImageIcon getIcon() {
-        URL iconURL = getClass().getResource("/over/res/img/icon_title.png");
-
-        return new ImageIcon(iconURL);
-    }
-
-    /**
-     * Plays a sound every time the chat is started.
-     * @param url the sound's path.
-     */
-    public static synchronized void playSound(final String url) {
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Clip clip = AudioSystem.getClip();
-
-                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(Client.class.getResourceAsStream("/over/res/sound/" + url));
-
-                    clip.open(inputStream);
-                    clip.start();
-                }
-                catch (Exception e) {
-                    System.err.println(e.getMessage());
-                }
-            }
-        }).start();
     }
 
     /**
@@ -291,9 +254,9 @@ public class Chat extends JFrame {
      * @param id the id for the current session.
      */
     public void initSession(String id) {
-        playSound("bubble_wav.wav");
+        FrameListener.getFrameListener().playSound("bubble_wav.wav");
 
-        lblSession.setText("Session:\t<" + id + ">\tstarted.");
+        lblSession.setText("Session: <" + id + "> started.");
     }
 
     /**
@@ -301,40 +264,7 @@ public class Chat extends JFrame {
      * @return the array which contains the server IP, connection PORT and the client's user name.
      */
     private String[] getPortData() {
-        String data[] = new String[3];
-
-        data[0] = IP;
-        data[1] = PORT;
-
-        JTextField txtIP = new JTextField(20);
-        txtIP.setText(IP);
-
-        JTextField txtPort = new JTextField(20);
-        txtPort.setText(PORT);
-
-        JTextField txtUser = new JTextField(20);
-        txtUser.setText("User name");
-
-        JPanel dataPanel = new JPanel();
-        dataPanel.setLayout(new GridLayout(3, 2));
-        dataPanel.add(new JLabel("Serve IP:"));
-        dataPanel.add(txtIP);
-        dataPanel.add(new JLabel("Connection port:"));
-        dataPanel.add(txtPort);
-        dataPanel.add(new JLabel("Enter your user name:"));
-        dataPanel.add(txtUser);
-
-        int result = JOptionPane.showConfirmDialog(null, dataPanel,"Communication configuration", JOptionPane.OK_CANCEL_OPTION);
-
-        if (result == JOptionPane.OK_OPTION) {
-            data[0] = txtIP.getText();
-            data[1] = txtPort.getText();
-            data[2] = txtUser.getText();
-        }
-        else
-            System.exit(0);
-
-        return data;
+        return new ConfigurationPanel().getConfigurationData();
     }
 
     /**
