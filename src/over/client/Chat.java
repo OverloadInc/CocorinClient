@@ -15,6 +15,11 @@ import java.net.URL;
  * Class that implements a Chat window to communicate a set of connected users vía sockets.
  */
 public class Chat extends JFrame {
+    private JMenuItem aboutOption;
+    private JMenuItem exitOption;
+    private JMenu fileMenu;
+    private JMenu helpMenu;
+    private JMenuBar menuBar;
     private JButton btnSend;
     private JPanel mainPanel;
     private JPanel northPanel;
@@ -29,8 +34,6 @@ public class Chat extends JFrame {
     private JList<String> userList;
     private DefaultListModel<String> model;
     private FontEditor fontEditor;
-
-
 
     /**
      * Instance for the client which communicates with the server.
@@ -55,6 +58,11 @@ public class Chat extends JFrame {
      * Initializes the chat components.
      */
     private void initComponents() {
+        menuBar = new JMenuBar();
+        fileMenu = new JMenu();
+        exitOption = new JMenuItem();
+        helpMenu = new JMenu();
+        aboutOption = new JMenuItem();
         btnSend = new JButton();
         northPanel = new JPanel();
         southPanel = new JPanel();
@@ -81,13 +89,48 @@ public class Chat extends JFrame {
 
         addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent evt) {
-                formWindowClosed(evt);
+                client.acceptDisconnection();
             }
 
             public void windowClosing(WindowEvent evt) {
-                formWindowClosing(evt);
+                client.acceptDisconnection();
             }
         });
+
+        menuBar.setName("menuBar");
+
+        fileMenu.setMnemonic('F');
+        fileMenu.setText("File");
+        fileMenu.setName("fileMenu");
+
+        exitOption.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
+        exitOption.setMnemonic('E');
+        exitOption.setText("Exit");
+        exitOption.setName("exitOption");
+        exitOption.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                client.acceptDisconnection();
+            }
+        });
+
+        fileMenu.add(exitOption);
+
+        menuBar.add(fileMenu);
+
+        helpMenu.setMnemonic('H');
+        helpMenu.setText("Help");
+        helpMenu.setName("helpMenu");
+
+        aboutOption.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+        aboutOption.setMnemonic('A');
+        aboutOption.setText("About");
+        aboutOption.setName("aboutOption");
+        helpMenu.add(aboutOption);
+
+        menuBar.add(helpMenu);
+
+        setJMenuBar(menuBar);
 
         mainPanel.setName("mainPanel");
         mainPanel.setLayout(new GridBagLayout());
@@ -191,22 +234,6 @@ public class Chat extends JFrame {
         pack();
 
         setLocationRelativeTo(null);
-    }
-
-    /**
-     * Windows closed event.
-     * @param event the event occurred in the window.
-     */
-    public void formWindowClosed(WindowEvent event) {
-        client.acceptDisconnection();
-    }
-
-    /**
-     * Window closing event.
-     * @param event the event occurred in the window.
-     */
-    public void formWindowClosing(WindowEvent event) {
-        client.acceptDisconnection();
     }
 
     /**
