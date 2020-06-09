@@ -30,7 +30,7 @@ public class FrameListener {
      * @return the icon's path for the application.
      */
     public ImageIcon getIcon() {
-        URL iconURL = getClass().getResource("/over/res/img/chat_icon_01.png");
+        URL iconURL = getClass().getResource("/over/res/img/cocorin_icon_64.png");
 
         return new ImageIcon(iconURL);
     }

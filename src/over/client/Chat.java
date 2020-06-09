@@ -1,15 +1,12 @@
 package over.client;
 
 import over.controller.ButtonListener;
+import over.controller.FontEditor;
 import over.controller.FrameListener;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.net.URL;
 
 /**
  * Class that implements a Chat window to communicate a set of connected users vía sockets.
@@ -80,7 +77,7 @@ public class Chat extends JFrame {
 
         GridBagConstraints gridBagConstraints;
 
-        setTitle("JChat v1.0");
+        setTitle("Cocorin v1.0");
         setName("frmChat");
         setIconImage(FrameListener.getFrameListener().getIcon().getImage());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -126,6 +123,13 @@ public class Chat extends JFrame {
         aboutOption.setMnemonic('A');
         aboutOption.setText("About");
         aboutOption.setName("aboutOption");
+        aboutOption.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new About().setVisible(true);
+            }
+        });
+
         helpMenu.add(aboutOption);
 
         menuBar.add(helpMenu);

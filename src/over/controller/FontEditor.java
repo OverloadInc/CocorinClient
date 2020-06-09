@@ -1,4 +1,4 @@
-package over.client;
+package over.controller;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
