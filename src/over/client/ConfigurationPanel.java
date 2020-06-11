@@ -48,69 +48,90 @@ public class ConfigurationPanel {
 
         dataPanel = new JPanel();
         dataPanel.setName("dataPanel");
-        dataPanel.setLayout(new java.awt.GridBagLayout());
+        dataPanel.setMaximumSize(new Dimension(350, 450));
+        dataPanel.setMinimumSize(new Dimension(350, 450));
+        dataPanel.setPreferredSize(new Dimension(350, 450));
+        dataPanel.setLayout(new GridBagLayout());
 
         JLabel lblLogo = new JLabel();
         lblLogo.setName("lblLogo");
+        lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
         lblLogo.setIcon(new ImageIcon(getClass().getResource("/over/res/img/cocorin_color_350.png")));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
 
         dataPanel.add(lblLogo, gridBagConstraints);
 
         JLabel lblIP = new JLabel();
         lblIP.setText("IP Address");
         lblIP.setName("lblIP");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
 
         dataPanel.add(lblIP, gridBagConstraints);
 
         txtIP = new JTextField(20);
         txtIP.setName("txtIP");
         txtIP.setText(IP);
+        txtIP.setMaximumSize(new Dimension(200, 20));
+        txtIP.setMinimumSize(new Dimension(200, 20));
+        txtIP.setPreferredSize(new Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
         dataPanel.add(txtIP, gridBagConstraints);
 
         JLabel lblPort = new JLabel();
         lblPort.setText("Port number");
         lblPort.setName("lblPort");
+        lblPort.setHorizontalAlignment(SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         dataPanel.add(lblPort, gridBagConstraints);
 
         txtPort = new JTextField(20);
         txtPort.setName("txtPort");
         txtPort.setText(PORT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        txtPort.setMaximumSize(new Dimension(200, 20));
+        txtPort.setMinimumSize(new Dimension(200, 20));
+        txtPort.setPreferredSize(new Dimension(200, 20));
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
         dataPanel.add(txtPort, gridBagConstraints);
 
         JLabel lblUser = new JLabel();
         lblUser.setText("User name");
         lblUser.setName("lblUser");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = GridBagConstraints.EAST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
         dataPanel.add(lblUser, gridBagConstraints);
 
         txtUser = new JTextField(20);
         txtUser.setText("User");
         txtUser.setName("txtUser");
-        gridBagConstraints = new java.awt.GridBagConstraints();
+        txtUser.setMaximumSize(new Dimension(200, 20));
+        txtUser.setMinimumSize(new Dimension(200, 20));
+        gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
         dataPanel.add(txtUser, gridBagConstraints);
 
         return dataPanel;

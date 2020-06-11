@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Class that implements a Chat window to communicate a set of connected users vía sockets.
+ * Chat class implements a Chat window to communicate a set of connected users vía sockets.
  */
 public class Chat extends JFrame {
     private JMenuItem aboutOption;
