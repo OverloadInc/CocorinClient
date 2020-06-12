@@ -42,7 +42,7 @@ public class About extends JFrame {
 
         lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
         lblLogo.setName("lblLogo");
-        lblLogo.setIcon(new ImageIcon(getClass().getResource("/over/res/img/cocorin_transparent_350.png")));
+        lblLogo.setIcon(new ImageIcon(getClass().getResource("/over/res/img/cocorin_about.png")));
         softwarePanel.add(lblLogo, BorderLayout.CENTER);
 
         getContentPane().add(softwarePanel, BorderLayout.CENTER);

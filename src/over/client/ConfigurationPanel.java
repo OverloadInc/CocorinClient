@@ -48,7 +48,7 @@ public class ConfigurationPanel {
         lblLogo = new JLabel();
         lblLogo.setName("lblLogo");
         lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-        lblLogo.setIcon(new ImageIcon(getClass().getResource("/over/res/img/cocorin_color_350.png")));
+        lblLogo.setIcon(new ImageIcon(getClass().getResource("/over/res/img/cocorin_login.png")));
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;

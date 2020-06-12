@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.net.URL;
 
 public class FrameListener {
+
     private static FrameListener frameListener;
 
     private FrameListener() {
@@ -30,7 +31,7 @@ public class FrameListener {
      * @return the icon's path for the application.
      */
     public ImageIcon getIcon() {
-        URL iconURL = getClass().getResource("/over/res/img/cocorin_icon_64.png");
+        URL iconURL = getClass().getResource("/over/res/img/cocorin_frame.png");
 
         return new ImageIcon(iconURL);
     }
