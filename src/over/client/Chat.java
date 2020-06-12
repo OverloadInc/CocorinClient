@@ -3,6 +3,7 @@ package over.client;
 import over.controller.ButtonListener;
 import over.controller.FontEditor;
 import over.controller.FrameListener;
+import over.controller.ListRenderer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,7 +73,7 @@ public class Chat extends JFrame {
         lblSession = new JLabel();
         lblOverload = new JLabel();
         model = new DefaultListModel<>();
-        userList = new JList<>(model);
+        userList = new JList(model);
         fontEditor = new FontEditor();
 
         GridBagConstraints gridBagConstraints;
@@ -104,12 +105,7 @@ public class Chat extends JFrame {
         exitOption.setMnemonic('E');
         exitOption.setText("Exit");
         exitOption.setName("exitOption");
-        exitOption.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                client.acceptDisconnection();
-            }
-        });
+        exitOption.addActionListener(e -> client.acceptDisconnection());
 
         fileMenu.add(exitOption);
 
@@ -123,12 +119,7 @@ public class Chat extends JFrame {
         aboutOption.setMnemonic('A');
         aboutOption.setText("About");
         aboutOption.setName("aboutOption");
-        aboutOption.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new About().setVisible(true);
-            }
-        });
+        aboutOption.addActionListener(e -> new About().setVisible(true));
 
         helpMenu.add(aboutOption);
 
@@ -159,6 +150,7 @@ public class Chat extends JFrame {
         userList.setName("userList");
         userList.setPreferredSize(new Dimension(126, 150));
         userList.setVisibleRowCount(15);
+        userList.setCellRenderer(new ListRenderer());
 
         scrollList.setName("scrollList");
         scrollList.setViewportView(userList);
@@ -191,12 +183,7 @@ public class Chat extends JFrame {
         btnSend.setName("btnSend");
         btnSend.setToolTipText("Send a message");
         btnSend.setIcon(new ImageIcon(getClass().getResource("/over/res/img/close_mail_01.png")));
-        btnSend.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                sendMessage(e);
-            }
-        });
+        btnSend.addActionListener(e -> sendMessage(e));
         btnSend.addMouseListener(new ButtonListener(btnSend));
 
         gridBagConstraints = new GridBagConstraints();
@@ -251,12 +238,12 @@ public class Chat extends JFrame {
             return;
         }
 
-        String receiver = userList.getSelectedValue().toString();
+        String receiver = userList.getSelectedValue();
         String message = txtMessage.getText();
 
         client.sendMessage(receiver, message);
 
-        fontEditor.setBold(txtConsole, client.getClientId() + " => " + receiver + ":");
+        fontEditor.setBold(txtConsole, client.getClientId() + " => " + receiver + ": ");
         fontEditor.setSimple(txtConsole,message + "\n");
 
         txtMessage.setText("");
@@ -276,7 +263,7 @@ public class Chat extends JFrame {
      * @param message the current message.
      */
     public void addMessage(String transmitter, String message) {
-        fontEditor.setBold(txtConsole, transmitter + ":");
+        fontEditor.setBold(txtConsole, transmitter + ": ");
         fontEditor.setSimple(txtConsole, message + "\n");
     }
 
@@ -304,7 +291,7 @@ public class Chat extends JFrame {
      */
     void removeUser(String id) {
         for (int i = 0; i < model.getSize(); i++) {
-            if(model.getElementAt(i).toString().equals(id)){
+            if(model.getElementAt(i).equals(id)){
                 model.remove(i);
                 return;
             }
@@ -323,10 +310,6 @@ public class Chat extends JFrame {
             java.util.logging.Logger.getLogger(Chat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Chat().setVisible(true);
-            }
-        });
+        EventQueue.invokeLater(() -> new Chat().setVisible(true));
     }
 }
