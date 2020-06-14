@@ -13,6 +13,7 @@ import java.awt.event.*;
  * Chat class implements a Chat window to communicate a set of connected users vía sockets.
  */
 public class Chat extends JFrame {
+    private JSplitPane splitPane;
     private JMenuItem aboutOption;
     private JMenuItem exitOption;
     private JMenu fileMenu;
@@ -56,6 +57,7 @@ public class Chat extends JFrame {
      * Initializes the chat components.
      */
     private void initComponents() {
+        splitPane = new JSplitPane();
         menuBar = new JMenuBar();
         fileMenu = new JMenu();
         exitOption = new JMenuItem();
@@ -130,22 +132,18 @@ public class Chat extends JFrame {
         mainPanel.setName("mainPanel");
         mainPanel.setLayout(new GridBagLayout());
 
+        splitPane.setDividerLocation(600);
+        splitPane.setDividerSize(5);
+        splitPane.setName("splitPane");
+        splitPane.setOneTouchExpandable(true);
+
         txtConsole.setName("txtConsole");
+        txtConsole.setEditable(false);
 
         scrollConsole.setName("scrollConsole");
         scrollConsole.setViewportView(txtConsole);
 
-        gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.fill = GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new Insets(0, 10, 0, 10);
-
-        mainPanel.add(scrollConsole, gridBagConstraints);
+        splitPane.setLeftComponent(scrollConsole);
 
         userList.setName("userList");
         userList.setPreferredSize(new Dimension(126, 150));
@@ -155,15 +153,21 @@ public class Chat extends JFrame {
         scrollList.setName("scrollList");
         scrollList.setViewportView(userList);
 
+        splitPane.setRightComponent(scrollList);
+
         gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.gridheight = 3;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 24;
+        gridBagConstraints.ipady = 199;
+        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new Insets(0, 0, 0, 10);
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 10);
 
-        mainPanel.add(scrollList, gridBagConstraints);
+        mainPanel.add(splitPane, gridBagConstraints);
 
         txtMessage.setName("txtMessage");
 
@@ -175,7 +179,7 @@ public class Chat extends JFrame {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new Insets(10, 10, 10, 10);
 
         mainPanel.add(scrollMessage, gridBagConstraints);
