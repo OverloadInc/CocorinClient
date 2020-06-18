@@ -33,6 +33,7 @@ public class Chat extends JFrame {
     private JList<String> userList;
     private DefaultListModel<String> model;
     private FontEditor fontEditor;
+    private JTabbedPane tabbedPane;
 
     /**
      * Instance for the client which communicates with the server.
@@ -77,6 +78,7 @@ public class Chat extends JFrame {
         model = new DefaultListModel<>();
         userList = new JList(model);
         fontEditor = new FontEditor();
+        tabbedPane = new JTabbedPane();
 
         GridBagConstraints gridBagConstraints;
 
@@ -143,7 +145,10 @@ public class Chat extends JFrame {
         scrollConsole.setName("scrollConsole");
         scrollConsole.setViewportView(txtConsole);
 
-        splitPane.setLeftComponent(scrollConsole);
+        tabbedPane.setName("tabbedPane");
+        tabbedPane.addTab("Conversations", scrollConsole);
+
+        splitPane.setLeftComponent(tabbedPane);
 
         userList.setName("userList");
         userList.setPreferredSize(new Dimension(126, 150));
