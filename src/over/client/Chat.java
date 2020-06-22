@@ -1,9 +1,11 @@
 package over.client;
 
-import over.controller.ButtonListener;
-import over.controller.FontEditor;
-import over.controller.FrameListener;
-import over.controller.ListRenderer;
+import over.controller.format.FontEditor;
+import over.controller.listener.ButtonListener;
+import over.controller.listener.FrameListener;
+import over.controller.listener.ListListener;
+import over.controller.renderer.ListRenderer;
+import over.controller.renderer.TabbedPaneRenderer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -68,17 +70,15 @@ public class Chat extends JFrame {
         northPanel = new JPanel();
         southPanel = new JPanel();
         mainPanel = new JPanel();
-        scrollConsole = new JScrollPane();
         scrollList = new JScrollPane();
         scrollMessage = new JScrollPane();
-        txtConsole = new JTextPane();
         txtMessage = new JTextPane();
         lblSession = new JLabel();
         lblOverload = new JLabel();
         model = new DefaultListModel<>();
         userList = new JList(model);
         fontEditor = new FontEditor();
-        tabbedPane = new JTabbedPane();
+        tabbedPane = new TabbedPaneRenderer();
 
         GridBagConstraints gridBagConstraints;
 
@@ -89,13 +89,35 @@ public class Chat extends JFrame {
         setMinimumSize(new Dimension(800, 600));
         setPreferredSize(new Dimension(800, 600));
 
-        addWindowListener(new WindowAdapter() {
-            public void windowClosed(WindowEvent evt) {
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowClosing(WindowEvent e) {
                 client.acceptDisconnection();
             }
 
-            public void windowClosing(WindowEvent evt) {
+            @Override
+            public void windowClosed(WindowEvent e) {
                 client.acceptDisconnection();
+            }
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
             }
         });
 
@@ -138,22 +160,13 @@ public class Chat extends JFrame {
         splitPane.setDividerSize(5);
         splitPane.setName("splitPane");
         splitPane.setOneTouchExpandable(true);
-
-        txtConsole.setName("txtConsole");
-        txtConsole.setEditable(false);
-
-        scrollConsole.setName("scrollConsole");
-        scrollConsole.setViewportView(txtConsole);
-
-        tabbedPane.setName("tabbedPane");
-        tabbedPane.addTab("Conversations", scrollConsole);
-
         splitPane.setLeftComponent(tabbedPane);
 
         userList.setName("userList");
         userList.setPreferredSize(new Dimension(126, 150));
         userList.setVisibleRowCount(15);
         userList.setCellRenderer(new ListRenderer());
+        userList.addMouseListener(new ListListener(userList, scrollList, txtConsole, tabbedPane));
 
         scrollList.setName("scrollList");
         scrollList.setViewportView(userList);

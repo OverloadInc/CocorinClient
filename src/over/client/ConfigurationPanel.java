@@ -2,15 +2,12 @@ package over.client;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 /**
  * ConfigurationPanel class builds a JPanel to enter the configuration data necessary to communicate
  * the chat application with the target server.
  */
 public class ConfigurationPanel {
-
     private JPanel dataPanel;
     private JTextField txtIP;
     private JTextField txtPort;
@@ -49,6 +46,7 @@ public class ConfigurationPanel {
         lblLogo.setName("lblLogo");
         lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
         lblLogo.setIcon(new ImageIcon(getClass().getResource("/over/res/img/cocorin_login.png")));
+
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -59,6 +57,7 @@ public class ConfigurationPanel {
         lblUser = new JLabel();
         lblUser.setText("User name");
         lblUser.setName("lblUser");
+
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -77,6 +76,7 @@ public class ConfigurationPanel {
         txtUser.requestFocusInWindow();
         txtUser.setSelectionStart(0);
         txtUser.setSelectionEnd(txtUser.getText().length());
+
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -85,12 +85,8 @@ public class ConfigurationPanel {
         dataPanel.add(txtUser, gridBagConstraints);
 
         tglEdit = new JToggleButton("Edit communication parameters");
-        tglEdit.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                hideElements();
-            }
-        });
+        tglEdit.addItemListener(e -> hideElements());
+
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -104,6 +100,7 @@ public class ConfigurationPanel {
         lblIP.setText("IP Address");
         lblIP.setName("lblIP");
         lblIP.setVisible(false);
+
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -120,6 +117,7 @@ public class ConfigurationPanel {
         txtIP.setMaximumSize(new Dimension(200, 30));
         txtIP.setMinimumSize(new Dimension(200, 30));
         txtIP.setPreferredSize(new Dimension(200, 30));
+
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
@@ -132,6 +130,7 @@ public class ConfigurationPanel {
         lblPort.setName("lblPort");
         lblPort.setVisible(false);
         lblPort.setHorizontalAlignment(SwingConstants.CENTER);
+
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
@@ -148,6 +147,7 @@ public class ConfigurationPanel {
         txtPort.setMaximumSize(new Dimension(200, 30));
         txtPort.setMinimumSize(new Dimension(200, 30));
         txtPort.setPreferredSize(new Dimension(200, 30));
+
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;

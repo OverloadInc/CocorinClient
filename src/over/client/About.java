@@ -1,10 +1,13 @@
 package over.client;
 
-import over.controller.FontEditor;
+import over.controller.format.FontEditor;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * About class implements a JFrame with the Cocorin chat developers' information.
+ */
 public class About extends JFrame {
     private JPanel aboutPanel;
     private JScrollPane aboutScroll;
@@ -16,11 +19,17 @@ public class About extends JFrame {
     private JTextPane txtAbout;
     private JTextPane txtCredits;
 
+    /**
+     * Class constructor.
+     */
     public About() {
         initComponents();
         setAbout();
     }
 
+    /**
+     * Initializes the JFrame components.
+     */
     private void initComponents() {
         softwarePanel = new JPanel();
         lblLogo = new JLabel();
@@ -88,6 +97,9 @@ public class About extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Sets the information of the applications and developers involved in the project.
+     */
     public void setAbout() {
         String application = "Cocorin";
         String description = " is an open source chat application and is licensed under GNU General Public License v3.";

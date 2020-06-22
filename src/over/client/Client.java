@@ -78,8 +78,6 @@ public class Client extends Thread {
             objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             objectInputStream = new ObjectInputStream(socket.getInputStream());
 
-            System.out.println("Successful connection");
-
             this.sendConnectionRequest(clientId);
             this.listen();
         }
@@ -134,7 +132,7 @@ public class Client extends Thread {
         }
     }
 
-    /*
+    /**
      * Listen to the current server.
      */
     public void listen() {
