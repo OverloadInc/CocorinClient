@@ -1,4 +1,4 @@
-package over.controller;
+package over.controller.listener;
 
 import over.client.Client;
 
@@ -8,10 +8,20 @@ import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.net.URL;
 
+/**
+ * FrameListener class provides the mechanisms necessary to change the frame icon and play sounds for
+ * user's messages notifications.
+ */
 public class FrameListener {
 
+    /**
+     * The FrameListener class instance.
+     */
     private static FrameListener frameListener;
 
+    /**
+     * Private class constructor.
+     */
     private FrameListener() {
     }
 
