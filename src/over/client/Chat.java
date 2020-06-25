@@ -1,15 +1,15 @@
 package over.client;
 
+import over.config.Configurator;
 import over.controller.format.FontEditor;
 import over.controller.listener.ButtonListener;
 import over.controller.listener.FrameListener;
-import over.controller.listener.ListListener;
 import over.controller.renderer.ListRenderer;
-import over.controller.renderer.TabbedPaneRenderer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Locale;
 
 /**
  * Chat class implements a Chat window to communicate a set of connected users vía sockets.
@@ -35,7 +35,6 @@ public class Chat extends JFrame {
     private JList<String> userList;
     private DefaultListModel<String> model;
     private FontEditor fontEditor;
-    private JTabbedPane tabbedPane;
 
     /**
      * Instance for the client which communicates with the server.
@@ -78,11 +77,10 @@ public class Chat extends JFrame {
         model = new DefaultListModel<>();
         userList = new JList(model);
         fontEditor = new FontEditor();
-        tabbedPane = new TabbedPaneRenderer();
 
         GridBagConstraints gridBagConstraints;
 
-        setTitle("Cocorin v1.0");
+        setTitle(Configurator.getConfigurator().getProperty("clientName"));
         setName("frmChat");
         setIconImage(FrameListener.getFrameListener().getIcon().getImage());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -124,12 +122,12 @@ public class Chat extends JFrame {
         menuBar.setName("menuBar");
 
         fileMenu.setMnemonic('F');
-        fileMenu.setText("File");
+        fileMenu.setText(Configurator.getConfigurator().getProperty("fileMenu"));
         fileMenu.setName("fileMenu");
 
         exitOption.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
         exitOption.setMnemonic('E');
-        exitOption.setText("Exit");
+        exitOption.setText(Configurator.getConfigurator().getProperty("exitOption"));
         exitOption.setName("exitOption");
         exitOption.addActionListener(e -> client.acceptDisconnection());
 
@@ -138,12 +136,12 @@ public class Chat extends JFrame {
         menuBar.add(fileMenu);
 
         helpMenu.setMnemonic('H');
-        helpMenu.setText("Help");
+        helpMenu.setText(Configurator.getConfigurator().getProperty("helpMenu"));
         helpMenu.setName("helpMenu");
 
         aboutOption.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
         aboutOption.setMnemonic('A');
-        aboutOption.setText("About");
+        aboutOption.setText(Configurator.getConfigurator().getProperty("aboutOption"));
         aboutOption.setName("aboutOption");
         aboutOption.addActionListener(e -> new About().setVisible(true));
 
@@ -156,17 +154,24 @@ public class Chat extends JFrame {
         mainPanel.setName("mainPanel");
         mainPanel.setLayout(new GridBagLayout());
 
+        txtConsole = new JTextPane();
+        txtConsole.setName("txtConsole");
+        txtConsole.setEditable(false);
+
+        scrollConsole = new JScrollPane();
+        scrollConsole.setName("scrollConsole");
+        scrollConsole.setViewportView(txtConsole);
+
         splitPane.setDividerLocation(600);
         splitPane.setDividerSize(5);
         splitPane.setName("splitPane");
         splitPane.setOneTouchExpandable(true);
-        splitPane.setLeftComponent(tabbedPane);
+        splitPane.setLeftComponent(txtConsole);
 
         userList.setName("userList");
         userList.setPreferredSize(new Dimension(126, 150));
         userList.setVisibleRowCount(15);
         userList.setCellRenderer(new ListRenderer());
-        userList.addMouseListener(new ListListener(userList, scrollList, txtConsole, tabbedPane));
 
         scrollList.setName("scrollList");
         scrollList.setViewportView(userList);
@@ -203,7 +208,7 @@ public class Chat extends JFrame {
         mainPanel.add(scrollMessage, gridBagConstraints);
 
         btnSend.setName("btnSend");
-        btnSend.setToolTipText("Send a message");
+        btnSend.setToolTipText(Configurator.getConfigurator().getProperty("btnSend"));
         btnSend.setIcon(new ImageIcon(getClass().getResource("/over/res/img/close_mail_01.png")));
         btnSend.addActionListener(e -> sendMessage(e));
         btnSend.addMouseListener(new ButtonListener(btnSend));
@@ -234,7 +239,7 @@ public class Chat extends JFrame {
         southPanel.setLayout(new BorderLayout());
 
         lblOverload.setName("lblOverload");
-        lblOverload.setText("Powered by Overload Inc.");
+        lblOverload.setText(Configurator.getConfigurator().getProperty("lblOverload"));
         lblOverload.setHorizontalAlignment(SwingConstants.CENTER);
         lblOverload.setHorizontalTextPosition(SwingConstants.CENTER);
         lblOverload.setMinimumSize(new Dimension(100, 25));
@@ -255,7 +260,7 @@ public class Chat extends JFrame {
      */
     public void sendMessage(ActionEvent event) {
         if(userList.getSelectedValue() == null) {
-            JOptionPane.showMessageDialog(null, "Please, select a valid target user or wait for connected users.");
+            JOptionPane.showMessageDialog(null, Configurator.getConfigurator().getProperty("sendMessage"));
 
             return;
         }
@@ -265,7 +270,7 @@ public class Chat extends JFrame {
 
         client.sendMessage(receiver, message);
 
-        fontEditor.setBold(txtConsole, client.getClientId() + " => " + receiver + ": ");
+        fontEditor.setBold(txtConsole, client.getClientId() + " -> " + receiver + ": ");
         fontEditor.setSimple(txtConsole,message + "\n");
 
         txtMessage.setText("");
@@ -294,9 +299,7 @@ public class Chat extends JFrame {
      * @param id the id for the current session.
      */
     public void initSession(String id) {
-        FrameListener.getFrameListener().playSound("bubble_wav.wav");
-
-        lblSession.setText("Session: <" + id + "> started.");
+        lblSession.setText(Configurator.getConfigurator().getProperty("welcome") + " " + id);
     }
 
     /**
@@ -327,6 +330,8 @@ public class Chat extends JFrame {
     public static void main(String... args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+            Configurator.getConfigurator().initConfigurator();
         }
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Chat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);

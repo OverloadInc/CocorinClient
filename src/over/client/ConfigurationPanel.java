@@ -1,5 +1,7 @@
 package over.client;
 
+import over.config.Configurator;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -55,7 +57,7 @@ public class ConfigurationPanel {
         dataPanel.add(lblLogo, gridBagConstraints);
 
         lblUser = new JLabel();
-        lblUser.setText("User name");
+        lblUser.setText(Configurator.getConfigurator().getProperty("lblUser"));
         lblUser.setName("lblUser");
 
         gridBagConstraints = new GridBagConstraints();
@@ -68,7 +70,7 @@ public class ConfigurationPanel {
         dataPanel.add(lblUser, gridBagConstraints);
 
         txtUser = new JTextField(20);
-        txtUser.setText("User");
+        txtUser.setText(Configurator.getConfigurator().getProperty("txtUser"));
         txtUser.setName("txtUser");
         txtUser.setMaximumSize(new Dimension(200, 30));
         txtUser.setMinimumSize(new Dimension(200, 30));
@@ -84,7 +86,7 @@ public class ConfigurationPanel {
 
         dataPanel.add(txtUser, gridBagConstraints);
 
-        tglEdit = new JToggleButton("Edit communication parameters");
+        tglEdit = new JToggleButton(Configurator.getConfigurator().getProperty("tglEdit01"));
         tglEdit.addItemListener(e -> hideElements());
 
         gridBagConstraints = new GridBagConstraints();
@@ -97,7 +99,7 @@ public class ConfigurationPanel {
         dataPanel.add(tglEdit, gridBagConstraints);
 
         lblIP = new JLabel();
-        lblIP.setText("IP Address");
+        lblIP.setText(Configurator.getConfigurator().getProperty("lblIP"));
         lblIP.setName("lblIP");
         lblIP.setVisible(false);
 
@@ -126,7 +128,7 @@ public class ConfigurationPanel {
         dataPanel.add(txtIP, gridBagConstraints);
 
         lblPort = new JLabel();
-        lblPort.setText("Port number");
+        lblPort.setText(Configurator.getConfigurator().getProperty("lblPort"));
         lblPort.setName("lblPort");
         lblPort.setVisible(false);
         lblPort.setHorizontalAlignment(SwingConstants.CENTER);
@@ -165,7 +167,7 @@ public class ConfigurationPanel {
     public String[] getConfigurationData() {
         String data[] = new String[3];
 
-        int result = JOptionPane.showConfirmDialog(null, getConfigurationPanel(),"Communication configuration", JOptionPane.OK_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(null, getConfigurationPanel(), Configurator.getConfigurator().getProperty("communication"), JOptionPane.OK_CANCEL_OPTION);
 
         if (result == JOptionPane.OK_OPTION) {
             data[0] = txtIP.getText();
@@ -187,7 +189,7 @@ public class ConfigurationPanel {
      */
     public void hideElements() {
         if(tglEdit.isSelected()) {
-            tglEdit.setText("Hide communication parameters");
+            tglEdit.setText(Configurator.getConfigurator().getProperty("tglEdit02"));
             lblUser.setVisible(false);
             txtUser.setVisible(false);
             lblIP.setVisible(true);
@@ -196,7 +198,7 @@ public class ConfigurationPanel {
             txtPort.setVisible(true);
         }
         else {
-            tglEdit.setText("Edit communication parameters");
+            tglEdit.setText(Configurator.getConfigurator().getProperty("tglEdit01"));
             lblUser.setVisible(true);
             txtUser.setVisible(true);
             lblIP.setVisible(false);

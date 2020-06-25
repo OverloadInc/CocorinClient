@@ -1,5 +1,6 @@
 package over.client;
 
+import over.config.Configurator;
 import over.controller.format.FontEditor;
 
 import javax.swing.*;
@@ -42,7 +43,7 @@ public class About extends JFrame {
         txtCredits = new JTextPane();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("About");
+        setTitle(Configurator.getConfigurator().getProperty("about"));
         setName("frmAbout");
         setResizable(false);
 
@@ -72,7 +73,7 @@ public class About extends JFrame {
 
         aboutPanel.add(aboutScroll, BorderLayout.CENTER);
 
-        tabbedPane.addTab("About", aboutPanel);
+        tabbedPane.addTab(Configurator.getConfigurator().getProperty("about"), aboutPanel);
 
         creditsPanel.setMaximumSize(new Dimension(400, 100));
         creditsPanel.setMinimumSize(new Dimension(400, 100));
@@ -88,7 +89,7 @@ public class About extends JFrame {
 
         creditsPanel.add(creditsScroll, BorderLayout.CENTER);
 
-        tabbedPane.addTab("Credits", creditsPanel);
+        tabbedPane.addTab(Configurator.getConfigurator().getProperty("credits"), creditsPanel);
 
         getContentPane().add(tabbedPane, BorderLayout.SOUTH);
 
@@ -101,14 +102,14 @@ public class About extends JFrame {
      * Sets the information of the applications and developers involved in the project.
      */
     public void setAbout() {
-        String application = "Cocorin";
-        String description = " is an open source chat application and is licensed under GNU General Public License v3.";
-        String team = "Developer";
-        String company = "\tOverload Inc.";
-        String developer01 = "\n\tJuan-Alberto Hernández-Martínez";
-        String contact = "\nContact";
-        String email01 = "\toverload.inc.mx@gmail.com";
-        String email02 = "\n\tjuan.alberto.hernandez.martinez@gmail.com";
+        String application = Configurator.getConfigurator().getProperty("application");
+        String description = " " + Configurator.getConfigurator().getProperty("description");
+        String team = Configurator.getConfigurator().getProperty("team");
+        String company = "\t" + Configurator.getConfigurator().getProperty("company");
+        String developer01 = "\n\t" + Configurator.getConfigurator().getProperty("developer01");
+        String contact = "\n" + Configurator.getConfigurator().getProperty("contact");
+        String email01 = "\t" + Configurator.getConfigurator().getProperty("email01");
+        String email02 = "\n\t" + Configurator.getConfigurator().getProperty("email02");
 
         try {
             FontEditor fontEditor = new FontEditor();

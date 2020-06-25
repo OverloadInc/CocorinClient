@@ -1,5 +1,7 @@
 package over.client;
 
+import over.config.Configurator;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -82,14 +84,12 @@ public class Client extends Thread {
             this.listen();
         }
         catch (UnknownHostException ex) {
-            JOptionPane.showMessageDialog(null, "Connection refused. Server not found.\n"
-                    + "Please, verify your IP address or star the server");
+            JOptionPane.showMessageDialog(null, Configurator.getConfigurator().getProperty("message01"));
 
             System.exit(0);
         }
         catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Connection refused. Input/Output error."
-                    + "Please, verify your IP address or star the server");
+            JOptionPane.showMessageDialog(null, Configurator.getConfigurator().getProperty("message02"));
 
             System.exit(0);
         }
@@ -107,7 +107,7 @@ public class Client extends Thread {
             isListening = false;
         }
         catch (Exception e) {
-            System.err.println(" Error on closing client's communication elements.");
+            System.err.println(Configurator.getConfigurator().getProperty("disconnect"));
         }
     }
 
@@ -128,7 +128,7 @@ public class Client extends Thread {
             objectOutputStream.writeObject(dataList);
         }
         catch (IOException ex) {
-            System.out.println("Input/Reading error on sending message to the server.");
+            System.out.println(Configurator.getConfigurator().getProperty("message03"));
         }
     }
 
@@ -144,14 +144,14 @@ public class Client extends Thread {
                     if (object instanceof LinkedList)
                         execute((LinkedList<String>)object);
                     else
-                        System.err.println("Unknown object received through the socket.");
+                        System.err.println(Configurator.getConfigurator().getProperty("message04"));
                 }
                 else
-                    System.err.println("NULL received through the socket");
+                    System.err.println("");
             }
         }
         catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Server communication lost.");
+            JOptionPane.showMessageDialog(null, Configurator.getConfigurator().getProperty("message05"));
 
             System.exit(0);
         }
@@ -201,7 +201,7 @@ public class Client extends Thread {
             objectOutputStream.writeObject(dataList);
         }
         catch (IOException ex) {
-            System.out.println("Input/Reading error on sending message to the server.");
+            System.out.println(Configurator.getConfigurator().getProperty("message03"));
         }
     }
 
@@ -219,7 +219,7 @@ public class Client extends Thread {
             objectOutputStream.writeObject(dataList);
         }
         catch (IOException ex) {
-            System.out.println("Input/Reading error on sending message to the server.");
+            System.out.println(Configurator.getConfigurator().getProperty("message03"));
         }
     }
 
