@@ -4,15 +4,18 @@ import over.config.Configurator;
 import over.controller.format.FontEditor;
 import over.controller.listener.ButtonListener;
 import over.controller.listener.FrameListener;
+import over.controller.listener.TextListener;
 import over.controller.renderer.ListRenderer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Locale;
 
 /**
- * Chat class implements a Chat window to communicate a set of connected users vía sockets.
+ * <code>Chat</code> class implements a chat window to communicate a set of connected users vía <code>sockets</code>.
+ *
+ * @author Overload Inc.
+ * @version %I%, %G%
  */
 public class Chat extends JFrame {
     private JSplitPane splitPane;
@@ -193,6 +196,7 @@ public class Chat extends JFrame {
         mainPanel.add(splitPane, gridBagConstraints);
 
         txtMessage.setName("txtMessage");
+        txtMessage.addKeyListener(new TextListener(this));
 
         scrollMessage.setName("scrollMessage");
         scrollMessage.setViewportView(txtMessage);
@@ -255,10 +259,9 @@ public class Chat extends JFrame {
     }
 
     /**
-     * Displays a warning message every time the user tries to send a message to a disconnected client.
-     * @param event the event.
+     * Sends a message to a specific connected client.
      */
-    public void sendMessage(ActionEvent event) {
+    public void sendMessage() {
         if(userList.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, Configurator.getConfigurator().getProperty("sendMessage"));
 
@@ -274,6 +277,18 @@ public class Chat extends JFrame {
         fontEditor.setSimple(txtConsole,message + "\n");
 
         txtMessage.setText("");
+    }
+
+    /**
+     * Sends a message every time the user performs a click over the <code>Send</code> button or presses the
+     * <code>Enter</code> key.
+     * @param event the event.
+     */
+    public void sendMessage(Object event) {
+        if(event instanceof KeyEvent && (((KeyEvent)event).getKeyCode() == 10))
+            sendMessage();
+        else if(event instanceof ActionEvent)
+            sendMessage();
     }
 
     /**
@@ -295,16 +310,16 @@ public class Chat extends JFrame {
     }
 
     /**
-     * Adds the tittle for the window session.
-     * @param id the id for the current session.
+     * Adds the title for the window session.
+     * @param id the <code>Id</code> for the current session.
      */
     public void initSession(String id) {
         lblSession.setText(Configurator.getConfigurator().getProperty("welcome") + " " + id);
     }
 
     /**
-     * Builds a new window to enter the host IP, port number, and the client's name.
-     * @return the array which contains the server IP, connection PORT and the client's user name.
+     * Builds a new window to enter the host <code>IP</code>, port number, and the client's name.
+     * @return the array which contains the server <code>IP</code>, connection <code>PORT</code> and the client's user name.
      */
     private String[] getPortData() {
         return new ConfigurationPanel().getConfigurationData();
@@ -312,7 +327,7 @@ public class Chat extends JFrame {
 
     /**
      * Removes a connected user of the list whenever the session is finished.
-     * @param id the user Id to remove from the list.
+     * @param id the user <code>Id</code> to remove from the list.
      */
     void removeUser(String id) {
         for (int i = 0; i < model.getSize(); i++) {
