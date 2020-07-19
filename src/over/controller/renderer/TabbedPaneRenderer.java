@@ -7,7 +7,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
 /**
- * TabbedPaneRenderer class creates a JTabbedPane and auto-sets a close button whenever a tab is added.
+ * <code>TabbedPaneRenderer</code> class creates a <code>JTabbedPane</code> and auto-sets a close button whenever
+ * a tab is added.
+ *
+ * @author Overload Inc.
+ * @version %I%, %G%
  */
 public class TabbedPaneRenderer extends JTabbedPane {
 
@@ -19,11 +23,11 @@ public class TabbedPaneRenderer extends JTabbedPane {
     }
 
     /**
-     * Overrides the addTab method to add the close button.
-     * @param title the JTabbedPane title.
-     * @param icon the JTabbedPane icon.
-     * @param component the Component to add.
-     * @param tooltip the JTabbedPane tool tip text.
+     * Overrides the <code>addTab</code> method to add the <code>close</code> button.
+     * @param title the <code>JTabbedPane</code> title.
+     * @param icon the <code>JTabbedPane</code> icon.
+     * @param component the <code>Component</code> to add.
+     * @param tooltip the <code>JTabbedPane</code> tool tip text.
      */
     @Override
     public void addTab(String title, Icon icon, Component component, String tooltip) {
@@ -35,10 +39,10 @@ public class TabbedPaneRenderer extends JTabbedPane {
     }
 
     /**
-     * Overrides the addTab method to add the close button.
-     * @param title the JTabbedPane title.
-     * @param icon the JTabbedPane icon.
-     * @param component the Component to add.
+     * Overrides the <code>addTab</code> method to add the <code>close</code> button.
+     * @param title the <code>JTabbedPane</code> title.
+     * @param icon the <code>JTabbedPane</code> icon.
+     * @param component the <code>Component</code> to add.
      */
     @Override
     public void addTab(String title, Icon icon, Component component) {
@@ -46,9 +50,9 @@ public class TabbedPaneRenderer extends JTabbedPane {
     }
 
     /**
-     * Overrides the addTab method to add the close button.
-     * @param title the JTabbedPane title.
-     * @param component the Component to add.
+     * Overrides the <code>addTab</code> method to add the <code>close</code> button.
+     * @param title the <code>JTabbedPane</code> title.
+     * @param component the <code>Component</code> to add.
      */
     @Override
     public void addTab(String title, Component component) {
@@ -56,37 +60,37 @@ public class TabbedPaneRenderer extends JTabbedPane {
     }
 
     /**
-     * Adds a new tab without the close button.
-     * @param title the JTabbedPane title.
-     * @param icon the JTabbedPane icon.
-     * @param component the Component to add.
-     * @param tooltip the tool tip text of the JTabbedPane.
+     * Adds a new tab without the <code>close</code> button.
+     * @param title the <code>JTabbedPane</code> title.
+     * @param icon the <code>JTabbedPane</code> icon.
+     * @param component the <code>Component</code> to add.
+     * @param tooltip the tool tip text of the <code>JTabbedPane</code>.
      */
     public void addTabNoExit(String title, Icon icon, Component component, String tooltip) {
         super.addTab(title, icon, component, tooltip);
     }
 
     /**
-     * Adds a new tab without the close button.
-     * @param title  the JTabbedPane title.
-     * @param icon the JTabbedPane icon.
-     * @param component the Component to add.
+     * Adds a new tab without the <code>close</code> button.
+     * @param title  the <code>JTabbedPane</code> title.
+     * @param icon the <code>JTabbedPane</code> icon.
+     * @param component the <code>Component</code> to add.
      */
     public void addTabNoExit(String title, Icon icon, Component component) {
         addTabNoExit(title, icon, component, null);
     }
 
     /**
-     * Adds a new tab without the close button.
-     * @param title the JTabbedPane title.
-     * @param component the Component to add.
+     * Adds a new tab without the <code>close</code> button.
+     * @param title the <code>JTabbedPane</code> title.
+     * @param component the <code>Component</code> to add.
      */
     public void addTabNoExit(String title, Component component) {
         addTabNoExit(title, null, component);
     }
 
     /**
-     * Inner class to add the close button to the JTabbedPane.
+     * Inner class to add the <code>close</code> button to the <code>JTabbedPane</code>.
      */
     public class CloseButtonTab extends JPanel {
         private Component tab;

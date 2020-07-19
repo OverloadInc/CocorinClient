@@ -7,7 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * About class implements a JFrame with the Cocorin chat developers' information.
+ * <code>About</code> class implements a <code>JFrame</code> with the <code>Cocorin</code> chat developers' information.
+ *
+ * @author Overload Inc.
+ * @version %I%, %G%
  */
 public class About extends JFrame {
     private JPanel aboutPanel;
@@ -29,7 +32,7 @@ public class About extends JFrame {
     }
 
     /**
-     * Initializes the JFrame components.
+     * Initializes the <code>JFrame</code> components.
      */
     private void initComponents() {
         softwarePanel = new JPanel();

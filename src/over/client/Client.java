@@ -9,12 +9,16 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 /**
- * Client class controls the user's operations for establishing a correct communication trough the chat application.
+ * <code>Client</code> class controls the user's operations for establishing a correct communication trough the chat
+ * application.
+ *
+ * @author Overload Inc.
+ * @version %I%, %G%
  */
 public class Client extends Thread {
 
     /**
-     * Socket to server communication.
+     * <code>Socket</code> to server communication.
      */
     private Socket socket;
 
@@ -29,12 +33,12 @@ public class Client extends Thread {
     private ObjectInputStream objectInputStream;
 
     /**
-     * Chat application GUI.
+     * Chat application's instance.
      */
     private final Chat chat;
 
     /**
-     * Unique client id.
+     * Unique client <code>Id</code>.
      */
     private String clientId;
 
@@ -44,7 +48,7 @@ public class Client extends Thread {
     private boolean isListening;
 
     /**
-     * Server host IP.
+     * Server host <code>IP</code>.
      */
     private final String host;
 
@@ -54,11 +58,11 @@ public class Client extends Thread {
     private final int port;
 
     /**
-     * Client class constructor.
+     * <code>Client</code> class constructor.
      * @param chat the target application.
      * @param host the target server host.
      * @param port the server port.
-     * @param clientId the unique client Id.
+     * @param clientId the unique client <code>Id</code>.
      */
     Client(Chat chat, String host, Integer port, String clientId) {
         this.chat = chat;
@@ -224,8 +228,8 @@ public class Client extends Thread {
     }
 
     /**
-     * Returns the unique client Id.
-     * @return the client Id.
+     * Returns the unique client <code>Id</code>.
+     * @return the client <code>Id</code>.
      */
     String getClientId() {
         return clientId;

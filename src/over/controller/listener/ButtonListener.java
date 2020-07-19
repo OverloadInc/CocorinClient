@@ -4,9 +4,24 @@ import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * <code>ButtonListener</code> provides the methods to change the <code>Send</code> button's icon whenever the user
+ * press, release, enter or exit the mouse. In addition, it provides the methods to react to a key pressed.
+ *
+ * @author Overload Inc.
+ * @version %I%, %G%
+ */
 public class ButtonListener implements MouseListener {
+
+    /**
+     * The <code>Send JButton</code> instance.
+     */
     private JButton btnSend;
 
+    /**
+     * Class constructor.
+     * @param btnSend the <code>JButton</code> instance.
+     */
     public ButtonListener(JButton btnSend) {
         this.btnSend = btnSend;
     }

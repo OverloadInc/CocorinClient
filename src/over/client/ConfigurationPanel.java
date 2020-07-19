@@ -6,8 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * ConfigurationPanel class builds a JPanel to enter the configuration data necessary to communicate
- * the chat application with the target server.
+ * <code>ConfigurationPanel</code> class builds a <code>JPanel</code> to enter the configuration data necessary to
+ * communicate the chat application with the target server.
+ *
+ * @author Overload Inc.
+ * @version %I%, %G%
  */
 public class ConfigurationPanel {
     private JPanel dataPanel;
@@ -26,13 +29,15 @@ public class ConfigurationPanel {
     private final String PORT ="10101";
 
     /**
-     * Specifies the default server IP (localhost: 127.0.0.1).
+     * Specifies the default server <code>IP</code>
+     * <p>
+     * For example: localhost 127.0.0.1, 10.156.30.207 or any other.
      */
-    private final String IP ="10.156.30.207";
+    private final String IP ="127.0.0.1";
 
     /**
-     * Builds a JPanel to enter the target server's communication data.
-     * @return the configuration JPanel.
+     * Builds a <code>JPanel</code> to enter the target server's communication data.
+     * @return the configuration <code>JPanel</code>.
      */
     public JPanel getConfigurationPanel() {
         GridBagConstraints gridBagConstraints;
@@ -185,7 +190,7 @@ public class ConfigurationPanel {
     }
 
     /**
-     * Hides the frame elements depending on the action performed by the configuration JToggleButton.
+     * Hides the frame elements depending on the action performed by the configuration <code>JToggleButton</code>.
      */
     public void hideElements() {
         if(tglEdit.isSelected()) {

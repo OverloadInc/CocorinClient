@@ -9,13 +9,16 @@ import javax.swing.*;
 import java.net.URL;
 
 /**
- * FrameListener class provides the mechanisms necessary to change the frame icon and play sounds for
+ * <code>FrameListener</code> class provides the mechanisms necessary to change the frame icon and play sounds for
  * user's messages notifications.
+ *
+ * @author Overload Inc.
+ * @version %I%, %G%
  */
 public class FrameListener {
 
     /**
-     * The FrameListener class instance.
+     * The <code>FrameListener</code> class instance.
      */
     private static FrameListener frameListener;
 
@@ -26,8 +29,8 @@ public class FrameListener {
     }
 
     /**
-     * Gets a FrameListener instance.
-     * @return the FrameListener instance.
+     * Gets a <code>FrameListener</code> instance.
+     * @return the <code>FrameListener</code> instance.
      */
     public static FrameListener getFrameListener() {
         if(frameListener == null)

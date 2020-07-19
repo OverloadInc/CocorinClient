@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * ListRenderer class modifies the JList's classical view and includes an icon for each item added.
+ * <code>ListRenderer</code> class modifies the <code>JList</code>'s classical view and includes an icon for each item added.
+ *
+ * @author Overload Inc.
+ * @version %I%, %G%
  */
 public class ListRenderer extends DefaultListCellRenderer {
 
