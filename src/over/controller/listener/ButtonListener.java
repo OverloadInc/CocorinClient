@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
  * press, release, enter or exit the mouse. In addition, it provides the methods to react to a key pressed.
  *
  * @author Overload Inc.
- * @version %I%, %G%
+ * @version 1.0, 09 Jan 2020
  */
 public class ButtonListener implements MouseListener {
 

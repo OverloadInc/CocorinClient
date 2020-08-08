@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  * application.
  *
  * @author Overload Inc.
- * @version %I%, %G%
+ * @version 1.0, 09 Jan 2020
  */
 public class Client extends Thread {
 

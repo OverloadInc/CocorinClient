@@ -10,7 +10,7 @@ import java.awt.*;
  * <code>About</code> class implements a <code>JFrame</code> with the <code>Cocorin</code> chat developers' information.
  *
  * @author Overload Inc.
- * @version %I%, %G%
+ * @version 1.0, 09 Jan 2020
  */
 public class About extends JFrame {
     private JPanel aboutPanel;

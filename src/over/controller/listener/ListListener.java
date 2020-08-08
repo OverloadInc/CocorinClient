@@ -8,7 +8,7 @@ import java.awt.event.MouseListener;
  * <code>ListListener</code> class provides the mechanism to create a tabbed pane for each user conversation.
  *
  * @author Overload Inc.
- * @version %I%, %G%
+ * @version 1.0, 09 Jan 2020
  */
 public class ListListener implements MouseListener {
 

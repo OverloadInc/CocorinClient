@@ -7,7 +7,7 @@ import java.awt.*;
  * <code>ListRenderer</code> class modifies the <code>JList</code>'s classical view and includes an icon for each item added.
  *
  * @author Overload Inc.
- * @version %I%, %G%
+ * @version 1.0, 09 Jan 2020
  */
 public class ListRenderer extends DefaultListCellRenderer {
 

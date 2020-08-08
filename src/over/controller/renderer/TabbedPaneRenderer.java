@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
  * a tab is added.
  *
  * @author Overload Inc.
- * @version %I%, %G%
+ * @version 1.0, 09 Jan 2020
  */
 public class TabbedPaneRenderer extends JTabbedPane {
 

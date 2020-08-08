@@ -15,7 +15,7 @@ import java.awt.event.*;
  * <code>Chat</code> class implements a chat window to communicate a set of connected users vía <code>sockets</code>.
  *
  * @author Overload Inc.
- * @version %I%, %G%
+ * @version 1.0, 09 Jan 2020
  */
 public class Chat extends JFrame {
     private JSplitPane splitPane;
